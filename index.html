@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>R.M. Nishant Suman | AI Engineer, Drone Tech Specialist & Tech Lead</title>
+  <meta name="description" content="Portfolio of R.M. Nishant Suman - Technical Lead @ Drone Sarthi Pvt Ltd, B.Tech CSE (AI), Machine Learning Engineer, Drone & IoT Specialist, and Technical Mentor.">
+  <meta name="keywords" content="R.M. Nishant Suman, Nishant Suman, Drone Sarthi, AI Engineer, Machine Learning, Drones, UAV, IoT, Mentorship, Tech Lead">
+  <meta name="author" content="R.M. Nishant Suman">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: ['class', '[data-theme="dark"]'],
+      theme: {
+        extend: {
+          colors: {
+            cyan: {
+              400: '#38bdf8',
+              500: '#06b6d4',
+              950: '#083344',
+            },
+            slate: {
+              850: '#0f172a',
+              900: '#0b1120',
+              950: '#060913',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="antialiased selection:bg-cyan-500 selection:text-slate-950">
+
+  <!-- Interactive Background Canvas -->
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- Top Sticky Navigation Bar -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-slate-950/80 backdrop-blur-lg border-b border-slate-800/80 transition-all">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Brand Logo -->
+      <a href="#hero" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 to-indigo-600 flex items-center justify-center font-mono font-bold text-white shadow-lg shadow-cyan-500/20 group-hover:scale-105 transition-transform">
+          NS
+        </div>
+        <div>
+          <span class="font-bold text-white tracking-tight group-hover:text-cyan-400 transition-colors text-base md:text-lg">
+            R.M.Nishant Suman
+          </span>
+          <span class="block text-[10px] font-mono text-cyan-400 -mt-1">AI &bull; DRONES &bull; IOT</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <nav class="hidden lg:flex items-center gap-1">
+        <a href="#about" class="nav-link">About</a>
+        <a href="#experience" class="nav-link">Experience</a>
+        <a href="#skills" class="nav-link">Skills</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#achievements" class="nav-link">Achievements</a>
+        <a href="#mentorship" class="nav-link">Mentorship</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </nav>
+
+      <!-- Action Buttons (Theme Toggle & CTA) -->
+      <div class="hidden sm:flex items-center gap-3">
+        <button id="theme-toggle-btn" aria-label="Toggle Theme" class="p-2.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-cyan-400 hover:border-cyan-500/40 transition-all">
+          <i id="theme-icon" data-lucide="sun" class="w-4 h-4"></i>
+        </button>
+
+        <a href="#contact" class="py-2.5 px-5 rounded-xl bg-gradient-to-r from-cyan-500 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 text-slate-950 font-bold text-sm shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40 transition-all">
+          Let's Connect
+        </a>
+      </div>
+
+      <!-- Mobile Menu Toggle -->
+      <div class="flex items-center gap-2 lg:hidden">
+        <button id="mobile-menu-toggle" aria-label="Toggle Navigation Menu" class="p-2.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-300">
+          <i data-lucide="menu" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Mobile Dropdown Menu -->
+    <div id="mobile-menu" class="hidden lg:hidden bg-slate-950/95 border-b border-slate-800 px-6 py-6 space-y-4">
+      <a href="#about" class="block text-slate-300 hover:text-cyan-400 font-medium py-2">About</a>
+      <a href="#experience" class="block text-slate-300 hover:text-cyan-400 font-medium py-2">Experience</a>
+      <a href="#skills" class="block text-slate-300 hover:text-cyan-400 font-medium py-2">Skills</a>
+      <a href="#projects" class="block text-slate-300 hover:text-cyan-400 font-medium py-2">Projects</a>
+      <a href="#achievements" class="block text-slate-300 hover:text-cyan-400 font-medium py-2">Achievements</a>
+      <a href="#mentorship" class="block text-slate-300 hover:text-cyan-400 font-medium py-2">Mentorship</a>
+      <a href="#contact" class="block text-slate-300 hover:text-cyan-400 font-medium py-2">Contact</a>
+      <div class="pt-4 border-t border-slate-800 flex items-center justify-between">
+        <span class="text-xs text-slate-400 font-mono">Switch Theme</span>
+        <button onclick="document.getElementById('theme-toggle-btn').click()" class="p-2 rounded-lg bg-slate-800 text-cyan-400">
+          <i data-lucide="sun" class="w-4 h-4"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Layout -->
+  <main class="relative z-10 pt-28">
+
+    <!-- 1. Hero Section -->
+    <section id="hero" class="min-h-[85vh] flex items-center justify-center px-4 sm:px-6 lg:px-8 py-12">
+      <div class="max-w-5xl mx-auto text-center reveal-on-scroll">
+        
+        <!-- Profile Avatar with Neon Ring -->
+        <div class="hero-avatar-ring group cursor-pointer" onclick="document.getElementById('about').scrollIntoView({behavior: 'smooth'})" title="Click to view About section">
+          <img 
+            src="assets/Nishant.png" 
+            alt="R.M. Nishant Suman" 
+            class="hero-avatar-img"
+            onerror="this.onerror=null; this.src='assets/profile-placeholder.svg';"
+          >
+        </div>
+
+        <!-- Status Radar Pill -->
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-950/60 border border-cyan-500/40 text-cyan-400 font-mono text-xs md:text-sm mb-6 shadow-lg shadow-cyan-500/10">
+          <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+          <span>TECHNICAL LEAD @ DRONE SARTHI PRIVATE LIMITED</span>
+        </div>
+
+        <!-- Hero Headline -->
+        <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white mb-6 leading-tight">
+          Hi, I'm <span class="text-gradient-cyan">R.M. Nishant Suman</span>
+        </h1>
+
+        <!-- Dynamic Typing Subtitle -->
+        <div class="text-lg sm:text-2xl md:text-3xl font-semibold text-slate-300 mb-6 h-12 flex items-center justify-center">
+          <span id="dynamic-roles" class="text-cyan-400 font-mono"></span>
+          <span class="typed-cursor">|</span>
+        </div>
+
+        <!-- Tagline / Bio summary -->
+        <p class="max-w-3xl mx-auto text-slate-400 text-base sm:text-lg md:text-xl leading-relaxed mb-10">
+          Pioneering the intersection of <span class="text-slate-200 font-semibold">Artificial Intelligence & Machine Learning</span>, <span class="text-slate-200 font-semibold">Autonomous Drone Systems</span>, and <span class="text-slate-200 font-semibold">Smart IoT Hardware</span>. Passionate about engineering high-impact tech and mentoring aspiring minds across schools and colleges.
+        </p>
+
+        <!-- CTA Action Buttons -->
+        <div class="flex flex-wrap items-center justify-center gap-4 mb-16">
+          <a href="#projects" class="py-3.5 px-8 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-sm md:text-base flex items-center gap-2 shadow-xl shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:-translate-y-0.5 transition-all">
+            <i data-lucide="layout-grid" class="w-4 h-4"></i> View Featured Projects
+          </a>
+          <a href="#mentorship" class="py-3.5 px-8 rounded-xl bg-slate-900/80 hover:bg-slate-800 border border-slate-700 text-slate-200 hover:text-white font-semibold text-sm md:text-base flex items-center gap-2 backdrop-blur-md hover:-translate-y-0.5 transition-all">
+            <i data-lucide="graduation-cap" class="w-4 h-4 text-cyan-400"></i> Mentorship & Talks
+          </a>
+          <a href="#contact" class="py-3.5 px-8 rounded-xl bg-slate-900/80 hover:bg-slate-800 border border-cyan-500/30 text-cyan-300 font-semibold text-sm md:text-base flex items-center gap-2 backdrop-blur-md hover:-translate-y-0.5 transition-all">
+            <i data-lucide="mail" class="w-4 h-4"></i> Get in Touch
+          </a>
+        </div>
+
+        <!-- Quick Stats Banner -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+          <div class="glass-card p-5 rounded-2xl text-center">
+            <div class="text-2xl md:text-3xl font-extrabold text-cyan-400 font-mono mb-1">10+</div>
+            <div class="text-xs md:text-sm text-slate-400 font-medium">Events & Hackathons Won</div>
+          </div>
+          <div class="glass-card p-5 rounded-2xl text-center">
+            <div class="text-2xl md:text-3xl font-extrabold text-indigo-400 font-mono mb-1">500+</div>
+            <div class="text-xs md:text-sm text-slate-400 font-medium">Students Mentored</div>
+          </div>
+          <div class="glass-card p-5 rounded-2xl text-center">
+            <div class="text-2xl md:text-3xl font-extrabold text-emerald-400 font-mono mb-1">15+</div>
+            <div class="text-xs md:text-sm text-slate-400 font-medium">AI & Drone Projects</div>
+          </div>
+          <div class="glass-card p-5 rounded-2xl text-center">
+            <div class="text-2xl md:text-3xl font-extrabold text-amber-400 font-mono mb-1">Tech Lead</div>
+            <div class="text-xs md:text-sm text-slate-400 font-medium">Drone Sarthi Pvt Ltd</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 2. About Me Section -->
+    <section id="about" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center reveal-on-scroll">
+        
+        <!-- Left: Narrative -->
+        <div class="lg:col-span-7 space-y-6">
+          <div class="inline-flex items-center gap-2 text-xs font-mono text-cyan-400 tracking-wider uppercase">
+            <i data-lucide="user" class="w-4 h-4"></i> About My Journey
+          </div>
+          
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight leading-tight">
+            Merging <span class="text-gradient-cyan">Intelligent Algorithms</span> with <span class="text-gradient-emerald">Autonomous Hardware</span>
+          </h2>
+
+          <p class="text-slate-300 text-base md:text-lg leading-relaxed">
+            I am a <strong class="text-white">B.Tech Computer Science & Engineering</strong> student specializing in <strong class="text-cyan-400">Artificial Intelligence</strong> and serving as the <strong class="text-white">Technical Lead & Manager</strong> at <strong class="text-cyan-300">Drone Sarthi Private Limited</strong>.
+          </p>
+
+          <p class="text-slate-400 text-sm md:text-base leading-relaxed">
+            My engineering work spans the entire spectrum from physical UAV avionics, telemetry communication, and microcontrollers (ESP32/Arduino) to deep learning vision architectures, edge inference, and autonomous drone navigation algorithms.
+          </p>
+
+          <p class="text-slate-400 text-sm md:text-base leading-relaxed">
+            Beyond engineering products, I am deeply committed to education. As a technical trainer and mentor, I conduct hands-on workshops in schools and universities, demystifying AI, IoT, and Drone technology for aspiring developers.
+          </p>
+
+          <!-- Core Pillars -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800 flex items-start gap-3">
+              <div class="w-8 h-8 rounded-lg bg-cyan-500/10 text-cyan-400 flex items-center justify-center shrink-0">
+                <i data-lucide="bot" class="w-4 h-4"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-white text-sm">AI & Machine Learning</h4>
+                <p class="text-xs text-slate-400 mt-0.5">Computer Vision, YOLO, Deep Learning models on the edge.</p>
+              </div>
+            </div>
+
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800 flex items-start gap-3">
+              <div class="w-8 h-8 rounded-lg bg-indigo-500/10 text-indigo-400 flex items-center justify-center shrink-0">
+                <i data-lucide="plane" class="w-4 h-4"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-white text-sm">UAV & Autonomous Flight</h4>
+                <p class="text-xs text-slate-400 mt-0.5">PX4, ArduPilot, ground control telemetry & navigation.</p>
+              </div>
+            </div>
+
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800 flex items-start gap-3">
+              <div class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center shrink-0">
+                <i data-lucide="cpu" class="w-4 h-4"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-white text-sm">IoT & Embedded Systems</h4>
+                <p class="text-xs text-slate-400 mt-0.5">ESP32, smart sensors, MQTT telemetry networks.</p>
+              </div>
+            </div>
+
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800 flex items-start gap-3">
+              <div class="w-8 h-8 rounded-lg bg-amber-500/10 text-amber-400 flex items-center justify-center shrink-0">
+                <i data-lucide="sparkles" class="w-4 h-4"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-white text-sm">Mentorship & Leadership</h4>
+                <p class="text-xs text-slate-400 mt-0.5">Technical management, school & college masterclasses.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Cyber Profile Photo & Telemetry Card -->
+        <div class="lg:col-span-5">
+          <div class="profile-cyber-wrapper w-full">
+            <div class="profile-ambient-glow"></div>
+            <div class="profile-cyber-frame p-6 sm:p-7 relative">
+              
+              <!-- Photo Container with Fallback -->
+              <div class="relative w-full aspect-[4/4.5] max-h-84 sm:max-h-96 rounded-2xl overflow-hidden mb-6 border border-cyan-500/30 bg-slate-950">
+                <img 
+                  src="assets/profile.jpg" 
+                  alt="R.M. Nishant Suman - Technical Lead & AI Specialist" 
+                  class="profile-cyber-img"
+                  onerror="this.onerror=null; this.src='assets/profile-placeholder.svg';"
+                >
+                <!-- Floating Live Role Tag -->
+                <div class="profile-tag-pill flex items-center justify-between">
+                  <div class="flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
+                    <span class="text-xs font-bold text-white tracking-wide">R.M. Nishant Suman</span>
+                  </div>
+                  <span class="text-[10px] font-mono text-cyan-400 bg-cyan-950/80 px-2 py-0.5 rounded border border-cyan-800/60 font-bold">TECH LEAD</span>
+                </div>
+              </div>
+
+              <!-- Terminal Telemetry Readout -->
+              <div class="bg-slate-950/90 p-4 rounded-xl border border-slate-800 font-mono text-xs space-y-2 mb-4 text-slate-300">
+                <div class="flex justify-between text-slate-500 border-b border-slate-800 pb-1">
+                  <span>TELEMETRY_ID</span>
+                  <span class="text-cyan-400 font-bold">RMN-AI-DRONE-01</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-slate-400">Current Role:</span>
+                  <span class="text-cyan-300">Tech Lead @ Drone Sarthi</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-slate-400">Specialization:</span>
+                  <span class="text-cyan-300"> Artificial Intelligence</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-slate-400">Core Stack:</span>
+                  <span class="text-emerald-400">AI &bull; Drones &bull; IoT</span>
+                </div>
+              </div>
+
+              <a href="#contact" class="block w-full text-center py-2.5 rounded-xl bg-cyan-500/10 border border-cyan-500/40 text-cyan-400 hover:bg-cyan-500 hover:text-slate-950 font-semibold text-sm transition-all">
+                Let's Collaborate &rarr;
+              </a>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 3. Experience & Leadership Section -->
+    <section id="experience" class="py-20 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
+      <div class="text-center mb-16 reveal-on-scroll">
+        <div class="inline-flex items-center gap-2 text-xs font-mono text-cyan-400 tracking-wider uppercase mb-3">
+          <i data-lucide="briefcase" class="w-4 h-4"></i> Career Timeline
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+          Leadership & Industry Experience
+        </h2>
+        <p class="text-slate-400 text-sm md:text-base max-w-2xl mx-auto mt-3">
+          Demonstrated technical management, competitive internship selection, and active technical education.
+        </p>
+      </div>
+
+      <!-- Experience Timeline Container -->
+      <div class="relative reveal-on-scroll">
+        <div class="timeline-stem"></div>
+        <div id="experience-timeline" class="space-y-4">
+          <!-- Populated by main.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Technical Skills Section -->
+    <section id="skills" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      <div class="text-center mb-16 reveal-on-scroll">
+        <div class="inline-flex items-center gap-2 text-xs font-mono text-cyan-400 tracking-wider uppercase mb-3">
+          <i data-lucide="cpu" class="w-4 h-4"></i> Technical Arsenal
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+          Skills & Core Competencies
+        </h2>
+        <p class="text-slate-400 text-sm md:text-base max-w-2xl mx-auto mt-3">
+          A comprehensive toolkit spanning intelligent software, autonomous aerial robotics, and hardware IoT prototyping.
+        </p>
+      </div>
+
+      <div id="skills-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6 reveal-on-scroll">
+        <!-- Populated by main.js -->
+      </div>
+    </section>
+
+    <!-- 5. Featured Projects Gallery -->
+    <section id="projects" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      <div class="text-center mb-12 reveal-on-scroll">
+        <div class="inline-flex items-center gap-2 text-xs font-mono text-cyan-400 tracking-wider uppercase mb-3">
+          <i data-lucide="folder-git-2" class="w-4 h-4"></i> Portfolio Work
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+          Featured Engineering Projects
+        </h2>
+        <p class="text-slate-400 text-sm md:text-base max-w-2xl mx-auto mt-3">
+          Real-world applications across Autonomous Drones, Deep Learning & Vision, Embedded IoT, and EdTech platforms.
+        </p>
+
+        <!-- Category Filters -->
+        <div class="flex flex-wrap items-center justify-center gap-2 mt-8">
+          <button class="filter-btn active" data-filter="all">All Projects</button>
+          <button class="filter-btn" data-filter="drones">Drones & UAVs</button>
+          <button class="filter-btn" data-filter="ai">AI & ML Vision</button>
+          <button class="filter-btn" data-filter="iot">IoT & Sensors</button>
+          <button class="filter-btn" data-filter="mentorship">EdTech & Kits</button>
+        </div>
+      </div>
+
+      <!-- Projects Grid -->
+      <div id="projects-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 reveal-on-scroll">
+        <!-- Populated by main.js -->
+      </div>
+    </section>
+
+    <!-- 6. Achievements & Hackathon Wins -->
+    <section id="achievements" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      <div class="text-center mb-16 reveal-on-scroll">
+        <div class="inline-flex items-center gap-2 text-xs font-mono text-cyan-400 tracking-wider uppercase mb-3">
+          <i data-lucide="trophy" class="w-4 h-4"></i> Recognition & Honors
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+          Hackathon Victories & Milestones
+        </h2>
+        <p class="text-slate-400 text-sm md:text-base max-w-2xl mx-auto mt-3">
+          Proven track record in high-pressure hackathons, competitive selections, and organizational leadership.
+        </p>
+      </div>
+
+      <div id="achievements-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6 reveal-on-scroll">
+        <!-- Populated by main.js -->
+      </div>
+    </section>
+
+    <!-- 7. Mentorship & Teaching Hub -->
+    <section id="mentorship" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      <div class="glass-panel p-8 sm:p-12 reveal-on-scroll">
+        <div class="max-w-3xl mx-auto text-center mb-12">
+          <div class="inline-flex items-center gap-2 text-xs font-mono text-amber-400 tracking-wider uppercase mb-3">
+            <i data-lucide="heart-handshake" class="w-4 h-4"></i> Giving Back Through Teaching
+          </div>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+            School & College Mentorship
+          </h2>
+          <p class="text-slate-300 text-sm md:text-base mt-4 leading-relaxed">
+            I actively deliver practical masterclasses, hands-on IoT & Drone workshops, and AI bootcamps for schools, engineering colleges, and technical clubs.
+          </p>
+        </div>
+
+        <!-- Topics Grid -->
+        <div id="workshops-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+          <!-- Populated by main.js -->
+        </div>
+
+        <!-- Invite Banner -->
+        <div class="text-center pt-6 border-t border-slate-800">
+          <p class="text-slate-400 text-xs sm:text-sm mb-4">
+            Interested in organizing a workshop, hackathon mentorship, or guest session at your institution?
+          </p>
+          <a href="#contact" class="inline-flex items-center gap-2 py-3 px-6 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-bold text-sm shadow-lg shadow-amber-500/20 transition-all">
+            <i data-lucide="mail-plus" class="w-4 h-4"></i> Request a Workshop / Mentorship Session
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. Contact & Connect Section -->
+    <section id="contact" class="py-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start reveal-on-scroll">
+        
+        <!-- Left: Details & Links -->
+        <div class="lg:col-span-5 space-y-6">
+          <div class="inline-flex items-center gap-2 text-xs font-mono text-cyan-400 tracking-wider uppercase">
+            <i data-lucide="send" class="w-4 h-4"></i> Let's Collaborate
+          </div>
+
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight leading-tight">
+            Get in Touch with <span class="text-gradient-cyan">Nishant</span>
+          </h2>
+
+          <p class="text-slate-300 text-sm md:text-base leading-relaxed">
+            Whether you want to discuss <strong class="text-white">Drone Technology</strong>, collaborate on <strong class="text-cyan-400">AI / Machine Learning projects</strong>, or invite me for <strong class="text-white">mentorship workshops</strong>, my inbox is always open.
+          </p>
+
+          <div class="space-y-4 pt-2">
+            <div class="flex items-center gap-4 p-4 rounded-xl bg-slate-900/60 border border-slate-800">
+              <div class="w-10 h-10 rounded-lg bg-cyan-500/10 text-cyan-400 flex items-center justify-center shrink-0">
+                <i data-lucide="briefcase" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <div class="text-xs text-slate-400 font-mono">Current Role</div>
+                <div class="text-sm font-semibold text-white">Technical Lead @ Drone Sarthi Pvt Ltd</div>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-4 p-4 rounded-xl bg-slate-900/60 border border-slate-800">
+              <div class="w-10 h-10 rounded-lg bg-indigo-500/10 text-indigo-400 flex items-center justify-center shrink-0">
+                <i data-lucide="map-pin" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <div class="text-xs text-slate-400 font-mono">Location</div>
+                <div class="text-sm font-semibold text-white">India</div>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-4 p-4 rounded-xl bg-slate-900/60 border border-slate-800">
+              <div class="w-10 h-10 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center shrink-0">
+                <i data-lucide="mail" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <div class="text-xs text-slate-400 font-mono">Direct Inquiries</div>
+                <div class="text-sm font-semibold text-white">Open to Opportunities & Consulting</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Social Icons -->
+          <div class="pt-4 flex items-center gap-3">
+            <a href="https://github.com" target="_blank" rel="noopener" aria-label="GitHub" class="w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-cyan-400 hover:border-cyan-500/40 flex items-center justify-center transition-all">
+              <i data-lucide="github" class="w-5 h-5"></i>
+            </a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn" class="w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-cyan-400 hover:border-cyan-500/40 flex items-center justify-center transition-all">
+              <i data-lucide="linkedin" class="w-5 h-5"></i>
+            </a>
+            <a href="https://twitter.com" target="_blank" rel="noopener" aria-label="Twitter / X" class="w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-cyan-400 hover:border-cyan-500/40 flex items-center justify-center transition-all">
+              <i data-lucide="twitter" class="w-5 h-5"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Right: Interactive Contact Form -->
+        <div class="lg:col-span-7">
+          <div class="glass-panel p-8 sm:p-10">
+            <h3 class="text-2xl font-bold text-white mb-2">Send a Message</h3>
+            <p class="text-slate-400 text-xs sm:text-sm mb-6">Leave your details and I'll respond as soon as possible.</p>
+
+            <form id="contact-form" class="space-y-4">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-mono text-slate-300 mb-1.5" for="name">Your Name</label>
+                  <input type="text" id="name" required placeholder="e.g. John Doe" class="w-full px-4 py-3 rounded-xl bg-slate-900/80 border border-slate-700/80 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 text-sm">
+                </div>
+                <div>
+                  <label class="block text-xs font-mono text-slate-300 mb-1.5" for="email">Your Email</label>
+                  <input type="email" id="email" required placeholder="john@example.com" class="w-full px-4 py-3 rounded-xl bg-slate-900/80 border border-slate-700/80 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 text-sm">
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs font-mono text-slate-300 mb-1.5" for="subject">Purpose / Subject</label>
+                <select id="subject" class="w-full px-4 py-3 rounded-xl bg-slate-900/80 border border-slate-700/80 text-white focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 text-sm">
+                  <option value="project">AI / Drone Project Collaboration</option>
+                  <option value="workshop">School / College Workshop or Mentorship</option>
+                  <option value="hiring">Hiring / Consulting Opportunity</option>
+                  <option value="other">General Inquiries / Connect</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-xs font-mono text-slate-300 mb-1.5" for="message">Your Message</label>
+                <textarea id="message" rows="4" required placeholder="Tell me about your project, school, or inquiry..." class="w-full px-4 py-3 rounded-xl bg-slate-900/80 border border-slate-700/80 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 text-sm"></textarea>
+              </div>
+
+              <button type="submit" class="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-cyan-500 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 text-slate-950 font-bold text-sm shadow-lg shadow-cyan-500/25 flex items-center justify-center gap-2 transition-all">
+                <i data-lucide="send" class="w-4 h-4"></i> Send Message
+              </button>
+            </form>
+
+            <div id="form-status-msg" class="mt-4 hidden"></div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="relative z-10 border-t border-slate-800/80 bg-slate-950/90 py-10 px-4 sm:px-6 lg:px-8 text-center">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <div class="w-6 h-6 rounded-lg bg-cyan-500 flex items-center justify-center text-slate-950 font-bold text-xs">
+          R
+        </div>
+        <span class="font-semibold text-white text-sm">R.M. Nishant Suman</span>
+      </div>
+
+      <p class="text-slate-400 text-xs font-mono">
+        Built with AI, Drones & IoT Innovation &bull; &copy; 2026 All Rights Reserved
+      </p>
+
+      <div class="flex items-center gap-4 text-xs text-slate-400 font-medium">
+        <a href="#hero" class="hover:text-cyan-400 transition-colors">Home</a>
+        <a href="#about" class="hover:text-cyan-400 transition-colors">About</a>
+        <a href="#projects" class="hover:text-cyan-400 transition-colors">Projects</a>
+        <a href="#contact" class="hover:text-cyan-400 transition-colors">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Project Details Modal -->
+  <div id="project-modal" class="modal-backdrop" onclick="if(event.target === this) closeProjectModal()">
+    <div class="modal-dialog p-6 md:p-8" id="modal-content-body">
+      <!-- Populated dynamically by main.js -->
+    </div>
+  </div>
+
+  <!-- Floating Action Button (Back to Top) -->
+  <button id="back-to-top" aria-label="Back to top" class="fab-btn">
+    <i data-lucide="arrow-up" class="w-5 h-5"></i>
+  </button>
+
+  <!-- Main JavaScript File -->
+  <script src="projects-data.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
